@@ -1,7 +1,19 @@
-import React from "react";
-import { Link } from "react-router";
+import React, { useState } from "react";
+import { data, Link } from "react-router";
+import { useDeleteBookMutation } from "../../services/baseApi";
 
 const BookCard = ({ book }: any) => {
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  const [deleteBookFn, { data }] = useDeleteBookMutation();
+
+  const handleDelete = async (id: any) => {
+    const response = await deleteBookFn(id);
+    if (response?.data?.success) {
+      alert(response.data.message);
+      setShowConfirm(false);
+    }
+  };
   return (
     <div className="max-w-64 rounded overflow-hidden shadow-lg">
       <img
@@ -17,6 +29,18 @@ const BookCard = ({ book }: any) => {
         <h5 className="font-medium text-sm">
           Genre: <span className="text-gray-500">{book?.genre}</span>
         </h5>
+        <h5 className="font-medium text-sm">
+          ISBN: <span className="text-gray-500">{book?.isbn}</span>
+        </h5>
+        <h5 className="font-medium text-sm">
+          Copies: <span className="text-gray-500">{book?.copies}</span>
+        </h5>
+        <h5 className="font-medium text-sm">
+          Available Book:{" "}
+          <span className="text-gray-500">
+            {book?.available ? "Available" : "Not Available"}
+          </span>
+        </h5>
         {/* <h5 className="font-medium text-sm">
           ISBN: <span className="text-gray-500">Saidul</span>
         </h5> */}
@@ -27,9 +51,40 @@ const BookCard = ({ book }: any) => {
             Edit
           </button>
         </Link>
-        <button className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 cursor-pointer">
-          Delete
-        </button>
+        <div
+          onMouseEnter={() => setShowConfirm(true)}
+          onMouseLeave={() => setShowConfirm(false)}
+          className="relative inline-block"
+        >
+          {/* PopConfirm Box */}
+          {showConfirm && (
+            <div className="absolute -top-20 left-1/2 -translate-x-1/2 bg-white shadow-md  rounded-lg px-4 py-2 z-10   w-48 text-center">
+              <p className="text-lg text-gray-800 mb-2">Are you sure?</p>
+              <div className="flex justify-center gap-2">
+                <button
+                  onClick={() => handleDelete(book?._id)}
+                  className="bg-red-500 text-white text-sm px-3 py-1 rounded hover:bg-red-600 cursor-pointer"
+                >
+                  Yes
+                </button>
+                <button
+                  onClick={() => setShowConfirm(false)}
+                  className="bg-gray-300 text-gray-700 text-sm px-3 py-1 rounded hover:bg-gray-400 cursor-pointer"
+                >
+                  No
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Main Delete Button */}
+          <button
+            onClick={() => setShowConfirm(false)}
+            className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 cursor-pointer"
+          >
+            Delete
+          </button>
+        </div>
         <button className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 cursor-pointer">
           Borrow
         </button>
