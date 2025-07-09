@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { data, Link } from "react-router";
 import { useDeleteBookMutation } from "../../services/baseApi";
+import { toast } from "react-toastify";
 
 const BookCard = ({ book }: any) => {
   const [showConfirm, setShowConfirm] = useState(false);
@@ -10,7 +11,7 @@ const BookCard = ({ book }: any) => {
   const handleDelete = async (id: any) => {
     const response = await deleteBookFn(id);
     if (response?.data?.success) {
-      alert(response.data.message);
+      toast.success(response.data.message);
       setShowConfirm(false);
     }
   };

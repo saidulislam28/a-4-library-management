@@ -4,6 +4,7 @@ import {
   useGetSingleBookQuery,
   useUpdateBookMutation,
 } from "../../services/baseApi";
+import { toast } from "react-toastify";
 
 export default function EditBook() {
   // api https://library-api-lilac.vercel.app/api/books/id
@@ -63,7 +64,7 @@ export default function EditBook() {
     const response = await updateBook(submissionData);
     if (response.data.success) {
       console.log("Form submitted with data:", response);
-      alert("Book created successfully! Check console for form data.");
+      toast.success("Book updated successfully!");
       setFormData({
         title: "",
         author: "",

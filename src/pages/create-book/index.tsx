@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useCreateBooksMutation } from "../../services/baseApi";
+import { toast } from "react-toastify";
 
 export default function CreateBookForm() {
   //https://library-api-lilac.vercel.app/api/books
@@ -47,7 +48,7 @@ export default function CreateBookForm() {
 
     const response = await createData(submissionData);
     if (response?.data?.success) {
-      alert("Book Created Successfully");
+      toast.success("Book Created Successfully");
       setFormData({
         title: "",
         author: "",

@@ -5,6 +5,7 @@ import {
   useBorrowBookMutation,
   useGetSingleBookQuery,
 } from "../../services/baseApi";
+import { toast } from "react-toastify";
 
 const BorrowBookForm = () => {
   const { bookId } = useParams();
@@ -31,11 +32,11 @@ const BorrowBookForm = () => {
     const response = await borrowBookFn(payload);
     if (response?.data?.success) {
       reset();
-      navigate("/borrow");
-      return alert(response?.data?.message);
+      navigate("/borrow-summary");
+      return toast.success(response?.data?.message);
     }
 
-    alert(response?.error?.data?.message);
+    toast.error(response?.error?.data?.message);
   };
 
   return (
