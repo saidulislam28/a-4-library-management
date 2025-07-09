@@ -3,11 +3,13 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://library-api-lilac.vercel.app/api",
+    baseUrl: "http://localhost:8000/api",
   }),
+  tagTypes: ["books"],
   endpoints: (builder) => ({
     getBooks: builder.query({
       query: () => "/books",
+      providesTags: ["books"],
     }),
     createBooks: builder.mutation({
       query: (data) => ({
@@ -31,6 +33,18 @@ export const baseApi = createApi({
         url: `/books/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["books"],
+    }),
+    borrowBook: builder.mutation({
+      query: (data) => ({
+        url: "/borrow",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["books"],
+    }),
+    getBorrowBooks: builder.query({
+      query: () => "/borrow",
     }),
   }),
 });
@@ -41,4 +55,6 @@ export const {
   useGetSingleBookQuery,
   useUpdateBookMutation,
   useDeleteBookMutation,
+  useBorrowBookMutation,
+  useGetBorrowBooksQuery,
 } = baseApi;
