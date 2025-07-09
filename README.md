@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Book Management App - README</title>
-</head>
+
 <body style="font-family: Arial, sans-serif; line-height: 1.6; padding: 2rem; background-color: #f9f9f9; color: #333;">
   <h1> <strong>Book Management App</strong></h1>
   <p>A full-featured Book Management application built using <strong>React (Vite)</strong>, styled with <strong>Tailwind CSS</strong>, and powered by <strong>Redux Toolkit (RTK Query)</strong> for state and data handling. This project allows users to manage books, borrow them, and track borrow summaries — all in one sleek interface!</p>
@@ -94,10 +88,10 @@
 
   <h2>📌 <strong>Setup Instructions</strong></h2>
   <pre style="background-color: #eee; padding: 1rem; border-radius: 6px;"><code># Clone the repo
-git clone https://github.com/your-username/book-management-app.git
+git clone https://github.com/saidulislam28/a-4-library-management
 
 # Navigate to project
-cd book-management-app
+cd a-4-library-management
 
 # Install dependencies
 npm install
@@ -108,4 +102,3 @@ npm run dev</code></pre>
   <hr>
 
 </body>
-</html>
