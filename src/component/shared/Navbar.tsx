@@ -1,26 +1,46 @@
-import React from "react";
-import { Link } from "react-router";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Menu, X } from "lucide-react";
 
-const Navbar = () => {
+export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <div className="h-16 shadow-sm">
-      <div className="max-w-7xl mx-auto flex items-center justify-between mt-5">
-        <Link to={"/"}>
-          <h2 className="font-semibold text-2xl">Book <span className="font-bold">Management</span></h2>
-        </Link>
-        <div className="flex items-center gap-8 font-medium">
-          <Link to={"/books"}>All Books</Link>
-          <Link to={"/create-book"}>Add Books</Link>
-          <Link to={"/borrow-summary"}>Borrow Summary</Link>
-        </div>
-        {/* <div>
-          <Link to={"/create-book"}>
-            <button className="px-4 py-2 border border-amber-400 rounded-2xl font-bold bg-amber-500 text-white cursor-pointer">Create Book</button>
+    <div className="shadow-sm bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <Link to="/" className="text-2xl font-semibold">
+            Book <span className="font-bold">Management</span>
           </Link>
-        </div> */}
+
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center gap-8 font-medium">
+            <Link to="/books" className="hover:text-blue-600 transition">All Books</Link>
+            <Link to="/create-book" className="hover:text-blue-600 transition">Add Books</Link>
+            <Link to="/borrow-summary" className="hover:text-blue-600 transition">Borrow Summary</Link>
+          </div>
+
+          {/* Mobile Hamburger Button */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="md:hidden text-gray-700 focus:outline-none"
+          >
+            {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="md:hidden px-4 pb-4">
+          <div className="flex flex-col gap-3 font-medium">
+            <Link to="/books" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">All Books</Link>
+            <Link to="/create-book" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Add Books</Link>
+            <Link to="/borrow-summary" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Borrow Summary</Link>
+          </div>
+        </div>
+      )}
     </div>
   );
-};
-
-export default Navbar;
+}

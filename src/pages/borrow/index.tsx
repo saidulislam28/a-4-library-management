@@ -12,10 +12,10 @@ const index = () => {
 
   return (
     <div className="min-h-[600px] max-w-7xl mx-auto">
-      <h1 className="text-center text-4xl font-bold my-10">
+      <h1 className="text-center text-xl lg:text-4xl font-bold my-10">
         Borrowed Books Summary
       </h1>
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-3 p-5 md:p-0">
         {data?.data?.map((item, index) => (
           <div
             key={index}

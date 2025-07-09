@@ -80,7 +80,7 @@ export default function EditBook() {
   return (
     <div className="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-sm border border-gray-200">
       <h2 className="text-xl font-semibold text-gray-800 mb-6">
-        Create New Book
+        Update Book
       </h2>
 
       <div className="space-y-4">

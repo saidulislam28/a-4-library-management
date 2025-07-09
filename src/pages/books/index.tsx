@@ -13,21 +13,17 @@ const index = () => {
   });
 
   if (isLoading) {
-    return <div>
-      loading.......
-    </div>;
+    return <div>loading.......</div>;
   }
 
-  if(error){
-    return <div>
-      something Went wrong, Try again later.
-    </div>
+  if (error) {
+    return <div>something Went wrong, Try again later.</div>;
   }
 
   console.log("books>>>>", data);
   return (
     <div className="min-h-[600px] max-w-7xl mx-auto">
-      <div className="grid grid-cols-4 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5  p-5 md:p-2">
         {data?.data?.map((book: any, index: number) => (
           <BookCard book={book} key={index} />
         ))}
